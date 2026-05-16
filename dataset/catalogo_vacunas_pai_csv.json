@@ -1,0 +1,31 @@
+{
+	"name": "catalogo_vacunas_pai_csv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_blob_vacunas",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "bronze"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "catalogo_vacunas_pai.csv",
+				"container": "bronze"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "vacuna_id;vacuna_nombre;enfermedad_previene;grupo_pai;numero_dosis;dosis_descripcion;edad_aplicacion_descripcion;edad_minima_dias;edad_maxima_dias;intervalo_minimo_dias;via_administracion;sitio_aplicacion;dosis_ml;condicion_especial",
+				"type": "String"
+			}
+		]
+	}
+}

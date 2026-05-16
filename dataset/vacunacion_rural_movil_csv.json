@@ -1,0 +1,31 @@
+{
+	"name": "vacunacion_rural_movil_csv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_blob_vacunas",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "bronze"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "vacunacion_rural_movil.csv",
+				"container": "bronze"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "record_id;sync_timestamp;device_id;patient_id;patient_ci;patient_name;patient_last_name_1;patient_last_name_2;patient_sex;patient_birth_date;patient_department;patient_municipality;patient_community;patient_indigenous;vaccination_date;vaccine_code;vaccine_name;dose_number;facility_code;facility_name;lot_number;storage_temp_celsius;patient_age_days;administration_route;gps_latitude;gps_longitude;gps_accuracy_meters;observations",
+				"type": "String"
+			}
+		]
+	}
+}

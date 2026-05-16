@@ -1,0 +1,31 @@
+{
+	"name": "catalogo_establecimientos_csv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_blob_vacunas",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "bronze"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "catalogo_establecimientos.csv",
+				"container": "bronze"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "establecimiento_id;nombre_establecimiento;tipo_establecimiento;nivel_atencion;zona;sedes;red_salud;departamento;municipio;latitud;longitud;tiene_cadena_frio;activo",
+				"type": "String"
+			}
+		]
+	}
+}

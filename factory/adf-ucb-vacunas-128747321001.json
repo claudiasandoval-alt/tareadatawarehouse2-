@@ -1,0 +1,10 @@
+{
+	"name": "adf-ucb-vacunas-128747321001",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Enabled",
+			"editable": true
+		}
+	},
+	"location": "brazilsouth"
+}

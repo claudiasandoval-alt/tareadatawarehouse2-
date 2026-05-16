@@ -16,14 +16,66 @@
 				"fileName": "catalogo_vacunas_pai.csv",
 				"container": "bronze"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": ";",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": [
 			{
-				"name": "vacuna_id;vacuna_nombre;enfermedad_previene;grupo_pai;numero_dosis;dosis_descripcion;edad_aplicacion_descripcion;edad_minima_dias;edad_maxima_dias;intervalo_minimo_dias;via_administracion;sitio_aplicacion;dosis_ml;condicion_especial",
+				"name": "vacuna_id",
+				"type": "String"
+			},
+			{
+				"name": "vacuna_nombre",
+				"type": "String"
+			},
+			{
+				"name": "enfermedad_previene",
+				"type": "String"
+			},
+			{
+				"name": "grupo_pai",
+				"type": "String"
+			},
+			{
+				"name": "numero_dosis",
+				"type": "String"
+			},
+			{
+				"name": "dosis_descripcion",
+				"type": "String"
+			},
+			{
+				"name": "edad_aplicacion_descripcion",
+				"type": "String"
+			},
+			{
+				"name": "edad_minima_dias",
+				"type": "String"
+			},
+			{
+				"name": "edad_maxima_dias",
+				"type": "String"
+			},
+			{
+				"name": "intervalo_minimo_dias",
+				"type": "String"
+			},
+			{
+				"name": "via_administracion",
+				"type": "String"
+			},
+			{
+				"name": "sitio_aplicacion",
+				"type": "String"
+			},
+			{
+				"name": "dosis_ml",
+				"type": "String"
+			},
+			{
+				"name": "condicion_especial",
 				"type": "String"
 			}
 		]

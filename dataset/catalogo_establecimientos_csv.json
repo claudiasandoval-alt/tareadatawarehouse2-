@@ -16,14 +16,62 @@
 				"fileName": "catalogo_establecimientos.csv",
 				"container": "bronze"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": ";",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": [
 			{
-				"name": "establecimiento_id;nombre_establecimiento;tipo_establecimiento;nivel_atencion;zona;sedes;red_salud;departamento;municipio;latitud;longitud;tiene_cadena_frio;activo",
+				"name": "establecimiento_id",
+				"type": "String"
+			},
+			{
+				"name": "nombre_establecimiento",
+				"type": "String"
+			},
+			{
+				"name": "tipo_establecimiento",
+				"type": "String"
+			},
+			{
+				"name": "nivel_atencion",
+				"type": "String"
+			},
+			{
+				"name": "zona",
+				"type": "String"
+			},
+			{
+				"name": "sedes",
+				"type": "String"
+			},
+			{
+				"name": "red_salud",
+				"type": "String"
+			},
+			{
+				"name": "departamento",
+				"type": "String"
+			},
+			{
+				"name": "municipio",
+				"type": "String"
+			},
+			{
+				"name": "latitud",
+				"type": "String"
+			},
+			{
+				"name": "longitud",
+				"type": "String"
+			},
+			{
+				"name": "tiene_cadena_frio",
+				"type": "String"
+			},
+			{
+				"name": "activo",
 				"type": "String"
 			}
 		]

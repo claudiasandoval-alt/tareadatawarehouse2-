@@ -1,0 +1,116 @@
+{
+	"name": "silver_vacunacion_consolidada",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_vacunas",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "silver"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "registro_id",
+				"type": "varchar"
+			},
+			{
+				"name": "ci_paciente",
+				"type": "varchar"
+			},
+			{
+				"name": "nombres",
+				"type": "varchar"
+			},
+			{
+				"name": "primer_apellido",
+				"type": "varchar"
+			},
+			{
+				"name": "segundo_apellido",
+				"type": "varchar"
+			},
+			{
+				"name": "cod_paciente",
+				"type": "varchar"
+			},
+			{
+				"name": "genero",
+				"type": "varchar"
+			},
+			{
+				"name": "fecha_nacimiento",
+				"type": "date"
+			},
+			{
+				"name": "pueblo_indigena",
+				"type": "varchar"
+			},
+			{
+				"name": "cod_vacuna",
+				"type": "varchar"
+			},
+			{
+				"name": "desc_vacuna",
+				"type": "varchar"
+			},
+			{
+				"name": "nro_dosis",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "fecha_vacunacion",
+				"type": "date"
+			},
+			{
+				"name": "cod_establecimiento",
+				"type": "varchar"
+			},
+			{
+				"name": "desc_establecimiento",
+				"type": "varchar"
+			},
+			{
+				"name": "municipio",
+				"type": "varchar"
+			},
+			{
+				"name": "departamento",
+				"type": "varchar"
+			},
+			{
+				"name": "lote_vacuna",
+				"type": "varchar"
+			},
+			{
+				"name": "temperatura_conservacion",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 2
+			},
+			{
+				"name": "edad_dias_aplicacion",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "via_aplicacion",
+				"type": "varchar"
+			},
+			{
+				"name": "aplicacion_oportuna",
+				"type": "varchar"
+			},
+			{
+				"name": "fuente_origen",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "silver",
+			"table": "vacunacion_consolidada"
+		}
+	}
+}

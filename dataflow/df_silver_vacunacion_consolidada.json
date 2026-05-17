@@ -1,0 +1,179 @@
+{
+	"name": "df_silver_vacunacion_consolidada",
+	"properties": {
+		"folder": {
+			"name": "silver"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "bronze_vacunacion_la_paz",
+						"type": "DatasetReference"
+					},
+					"name": "origenLaPaz"
+				},
+				{
+					"dataset": {
+						"referenceName": "bronze_vacunacion_santa_cruz",
+						"type": "DatasetReference"
+					},
+					"name": "origenSantaCruz"
+				},
+				{
+					"dataset": {
+						"referenceName": "bronze_vacunacion_rural_movil",
+						"type": "DatasetReference"
+					},
+					"name": "origenRuralMovil"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "derivedColumn2"
+				},
+				{
+					"name": "derivedColumn3"
+				},
+				{
+					"name": "union1"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "cast1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          correlativo_sin_nombre as string,",
+				"          nombres as string,",
+				"          primer_apellido as string,",
+				"          segundo_apellido as string,",
+				"          documento_identidad as string,",
+				"          cod_paciente as string,",
+				"          genero as string,",
+				"          fec_nacimiento as string,",
+				"          pueblo_indigena as string,",
+				"          cod_vacuna as string,",
+				"          desc_vacuna as string,",
+				"          nro_dosis as string,",
+				"          fec_vacunacion as string,",
+				"          cod_establecimiento as string,",
+				"          desc_establecimiento as string,",
+				"          municipio as string,",
+				"          depto as string,",
+				"          nro_lote as string,",
+				"          temp_conservacion as string,",
+				"          edad_dias as string,",
+				"          via_aplicacion as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> origenLaPaz",
+				"source(output(",
+				"          registro_id as string,",
+				"          ci_paciente as string,",
+				"          nombres as string,",
+				"          primer_apellido as string,",
+				"          segundo_apellido as string,",
+				"          cod_paciente as string,",
+				"          genero as string,",
+				"          fecha_nacimiento as string,",
+				"          pueblo_indigena as string,",
+				"          cod_vacuna as string,",
+				"          desc_vacuna as string,",
+				"          nro_dosis as string,",
+				"          fecha_vacunacion as string,",
+				"          cod_establecimiento as string,",
+				"          desc_establecimiento as string,",
+				"          municipio as string,",
+				"          departamento as string,",
+				"          lote_vacuna as string,",
+				"          temperatura_conservacion as string,",
+				"          edad_dias_aplicacion as string,",
+				"          via_aplicacion as string,",
+				"          aplicacion_oportuna as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> origenSantaCruz",
+				"source(output(",
+				"          registro_id as string,",
+				"          ci_paciente as string,",
+				"          nombres as string,",
+				"          primer_apellido as string,",
+				"          segundo_apellido as string,",
+				"          cod_paciente as string,",
+				"          genero as string,",
+				"          fecha_nacimiento as string,",
+				"          pueblo_indigena as string,",
+				"          cod_vacuna as string,",
+				"          desc_vacuna as string,",
+				"          nro_dosis as string,",
+				"          fecha_vacunacion as string,",
+				"          cod_establecimiento as string,",
+				"          desc_establecimiento as string,",
+				"          municipio as string,",
+				"          departamento as string,",
+				"          lote_vacuna as string,",
+				"          temperatura_conservacion as string,",
+				"          edad_dias_aplicacion as string,",
+				"          via_aplicacion as string,",
+				"          aplicacion_oportuna as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> origenRuralMovil",
+				"origenLaPaz derive(fuente_origen = 'La Paz') ~> derivedColumn1",
+				"origenSantaCruz derive(fuente_origen = 'Santa Cruz') ~> derivedColumn2",
+				"origenRuralMovil derive(fuente_origen = 'Rural Movil') ~> derivedColumn3",
+				"select1, derivedColumn2, derivedColumn3 union(byName: true)~> union1",
+				"derivedColumn1 select(mapColumn(",
+				"          registro_id = correlativo_sin_nombre,",
+				"          nombres,",
+				"          primer_apellido,",
+				"          segundo_apellido,",
+				"          ci_paciente = documento_identidad,",
+				"          cod_paciente,",
+				"          genero,",
+				"          fecha_nacimiento = fec_nacimiento,",
+				"          pueblo_indigena,",
+				"          cod_vacuna,",
+				"          desc_vacuna,",
+				"          nro_dosis,",
+				"          fecha_vacunacion = fec_vacunacion,",
+				"          cod_establecimiento,",
+				"          desc_establecimiento,",
+				"          municipio,",
+				"          departamento = depto,",
+				"          lote_vacuna = nro_lote,",
+				"          temperatura_conservacion = temp_conservacion,",
+				"          edad_dias_aplicacion = edad_dias,",
+				"          via_aplicacion,",
+				"          fuente_origen",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"union1 cast(output(",
+				"          registro_id as string,",
+				"          nombres as string,",
+				"          primer_apellido as string,",
+				"          fecha_nacimiento as date,",
+				"          temperatura_conservacion as decimal(10,0),",
+				"          edad_dias_aplicacion as string",
+				"     ),",
+				"     errors: true) ~> cast1"
+			]
+		}
+	}
+}

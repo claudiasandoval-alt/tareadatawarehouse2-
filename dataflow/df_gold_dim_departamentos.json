@@ -1,0 +1,73 @@
+{
+	"name": "df_gold_dim_departamentos",
+	"properties": {
+		"folder": {
+			"name": "gold"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "silver_catalogo_departamentos",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "gold_dim_departamentos",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          municipio_id as string,",
+				"          municipio_nombre as string,",
+				"          departamento as string,",
+				"          codigo_departamento as string,",
+				"          zona_geografica as string,",
+				"          es_capital_departamental as string,",
+				"          poblacion_depto_estimada as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source1",
+				"source1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          municipio_id as string,",
+				"          municipio_nombre as string,",
+				"          departamento as string,",
+				"          codigo_departamento as string,",
+				"          zona_geografica as string,",
+				"          es_capital_departamental as string,",
+				"          poblacion_depto_estimada as integer",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          municipio_id,",
+				"          municipio_nombre,",
+				"          departamento,",
+				"          codigo_departamento,",
+				"          zona_geografica,",
+				"          es_capital_departamental,",
+				"          poblacion_depto_estimada",
+				"     )) ~> sink1"
+			]
+		}
+	}
+}

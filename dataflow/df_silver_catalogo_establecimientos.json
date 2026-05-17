@@ -1,0 +1,100 @@
+{
+	"name": "df_silver_catalogo_establecimientos",
+	"properties": {
+		"folder": {
+			"name": "silver"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "bronze_catalogo_establecimientos",
+						"type": "DatasetReference"
+					},
+					"name": "origenEstablecimiento"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "silver_catalogo_establecimientos",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "cast1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          establecimiento_id as string,",
+				"          nombre_establecimiento as string,",
+				"          municipio as string,",
+				"          tipo_establecimiento as string,",
+				"          nivel_atencion as string,",
+				"          zona as string,",
+				"          sedes as string,",
+				"          red_salud as string,",
+				"          departamento as string,",
+				"          latitud as string,",
+				"          longitud as string,",
+				"          tiene_cadena_frio as string,",
+				"          activo as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> origenEstablecimiento",
+				"origenEstablecimiento cast(output(",
+				"          latitud as decimal(10,0),",
+				"          longitud as decimal(10,0)",
+				"     ),",
+				"     errors: true) ~> cast1",
+				"cast1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          establecimiento_id as string,",
+				"          nombre_establecimiento as string,",
+				"          municipio as string,",
+				"          tipo_establecimiento as string,",
+				"          nivel_atencion as string,",
+				"          zona as string,",
+				"          sedes as string,",
+				"          red_salud as string,",
+				"          departamento as string,",
+				"          latitud as decimal(10,6),",
+				"          longitud as decimal(10,6),",
+				"          tiene_cadena_frio as string,",
+				"          activo as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          establecimiento_id,",
+				"          nombre_establecimiento,",
+				"          municipio,",
+				"          tipo_establecimiento,",
+				"          nivel_atencion,",
+				"          zona,",
+				"          sedes,",
+				"          red_salud,",
+				"          departamento,",
+				"          latitud,",
+				"          longitud,",
+				"          tiene_cadena_frio,",
+				"          activo",
+				"     )) ~> sink1"
+			]
+		}
+	}
+}

@@ -139,7 +139,6 @@
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
-				"          registro_id,",
 				"          ci_paciente,",
 				"          cod_paciente,",
 				"          genero,",
@@ -155,7 +154,8 @@
 				"          edad_dias_aplicacion,",
 				"          via_aplicacion,",
 				"          aplicacion_oportuna,",
-				"          fuente_origen",
+				"          fuente_origen,",
+				"          registro_id",
 				"     )) ~> sink1"
 			]
 		}
